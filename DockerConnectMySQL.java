@@ -23,7 +23,7 @@ public class DockerConnectMySQL {
       DatabaseMetaData md = conn.getMetaData();
       ResultSet rs = md.getTables(null, null, "Persons", null);
       while (rs.next()) {
-            System.out.println("Base Exist");
+            System.out.println("Table Exist");
 	    baseExist = true;
       }
       rs = null;  
@@ -49,14 +49,14 @@ public class DockerConnectMySQL {
          int id  = rs.getInt("PersonID");
          String first = rs.getString("FirstName");
          String last = rs.getString("LastName");
-		 String address = rs.getString("Address");
-		 String city = rs.getString("City");
+	 String address = rs.getString("Address");
+	 String city = rs.getString("City");
 
          System.out.println("ID: " + id);
          System.out.println(", First: " + first);
          System.out.println(", Last: " + last);
-		 System.out.println(", Address: " + address);
-		 System.out.println(", City: " + city);
+	 System.out.println(", Address: " + address);
+	 System.out.println(", City: " + city);
       }
       rs.close();
       stmt.close();
