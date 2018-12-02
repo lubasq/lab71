@@ -12,15 +12,12 @@ public class DockerConnectMySQL {
    Statement stmt = null;
    Boolean baseExist = false;
    String sql;
-   DatabaseMetaData md = connection.getMetaData();
-   ResultSet rs = md.getTables(null, null, "Persons", null);
   
    try{
       Class.forName("com.mysql.cj.jdbc.Driver");
 	   
       System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(DB_URL,USER,PASS);
-	   
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);	   
       	   
       System.out.println("Check if table in base exist");
       DatabaseMetaData md = conn.getMetaData();
@@ -29,7 +26,7 @@ public class DockerConnectMySQL {
             System.out.println("Base Exist");
 	    baseExist = true;
       }
-	   
+      rs = null;  
       if(!baseExist){
       	System.out.println("Creating Table");
       	stmt = conn.createStatement();
@@ -46,7 +43,7 @@ public class DockerConnectMySQL {
 	   
       stmt = conn.createStatement();
       sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
-      ResultSet rs = stmt.executeQuery(sql);
+      rs = stmt.executeQuery(sql);
 
       while(rs.next()){
          int id  = rs.getInt("PersonID");
