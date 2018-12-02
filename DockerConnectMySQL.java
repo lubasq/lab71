@@ -1,5 +1,4 @@
 import java.sql.*;
-import java.util.Scanner;
 
 public class DockerConnectMySQL {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -11,9 +10,8 @@ public class DockerConnectMySQL {
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
-   boolean baseExist = false;
+   Boolean baseExist = false;
    String sql;
-   Scanner reader = new Scanner(System.in);
   
    try{
       Class.forName("com.mysql.cj.jdbc.Driver");
@@ -38,9 +36,9 @@ public class DockerConnectMySQL {
       }
 	   
       stmt = conn.createStatement();
-      System.out.println("Inserting Data to Table. Please enter how many entries u want to add: ");
-	  String howManyInserts = reader.nextLine();
-      stmt.executeUpdate(Inserts( Integer.parseInt(howManyInserts) ));	 
+      System.out.println("Inserting Data to Table");
+      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Nazwisko1', 'Imie1', 'Ulica1','Lublin'), (2, 'Nazwisko2', 'Imie2', 'Ulica2','Lublin'), (3, 'Nazwisko3', 'Imie3', 'Ulica3','Lublin')";
+      stmt.executeUpdate(sql);	 
       stmt = null;
 	   
       stmt = conn.createStatement();
@@ -80,18 +78,5 @@ public class DockerConnectMySQL {
          se.printStackTrace();
       }
    }
- }
- 
- static private String Inserts(int iterate){
-	String sql = "";
-	sql += "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES ";
-	for (int i=0; i < iterate; i++){
-		sql += "(" + i + " ,Surname"+i + " ,Name"+i + " ,Street"+i + ", Lublin)";
-		
-		if(i != iterate-1){
-			sql += ", ";
-		}
-	}
-	return sql;
  }
 }
