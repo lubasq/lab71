@@ -16,15 +16,15 @@ public class DockerConnectMySQL {
       System.out.println("Connecting to database...");
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
       stmt = conn.createStatement();
-      stmt1 = conn.createStatement();
-      stmt2 = conn.createStatement();
       String sql;
       System.out.println("Creating Table");
       sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) )";
-      stmt1.executeUpdate(sql);
+      stmt.executeUpdate(sql);
+      stmt = null;
       System.out.println("Inserting Data to Table");
       sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Sureshkumar', 'Deepak', 'Jackal Creek','Johannesburg');";
-      stmt2.executeUpdate(sql);	   
+      stmt.executeUpdate(sql);	 
+      stmt = null;
       sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
       ResultSet rs = stmt.executeQuery(sql);
 
@@ -43,8 +43,6 @@ public class DockerConnectMySQL {
       }
       rs.close();
       stmt.close();
-      stmt1.close();
-      stmt2.close();
       conn.close();
    }catch(SQLException se){
       se.printStackTrace();
