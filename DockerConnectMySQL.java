@@ -23,7 +23,7 @@ public class DockerConnectMySQL {
 	   
       	   
       System.out.println("Check if table in base exist");
-      DatabaseMetaData md = connection.getMetaData();
+      DatabaseMetaData md = conn.getMetaData();
       ResultSet rs = md.getTables(null, null, "Persons", null);
       while (rs.next()) {
             System.out.println("Base Exist");
