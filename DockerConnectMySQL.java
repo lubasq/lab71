@@ -21,10 +21,12 @@ public class DockerConnectMySQL {
       sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) )";
       stmt.executeUpdate(sql);
       stmt = null;
+      stmt = conn.createStatement();
       System.out.println("Inserting Data to Table");
       sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Sureshkumar', 'Deepak', 'Jackal Creek','Johannesburg');";
       stmt.executeUpdate(sql);	 
       stmt = null;
+      stmt = conn.createStatement();
       sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
       ResultSet rs = stmt.executeQuery(sql);
 
