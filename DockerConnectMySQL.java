@@ -10,22 +10,40 @@ public class DockerConnectMySQL {
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
+   Boolean baseExist = false;
+   String sql;
+   DatabaseMetaData md = connection.getMetaData();
+   ResultSet rs = md.getTables(null, null, "Persons", null);
+  
    try{
       Class.forName("com.mysql.cj.jdbc.Driver");
-
+	   
       System.out.println("Connecting to database...");
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
-      stmt = conn.createStatement();
-      String sql;
-      System.out.println("Creating Table");
-      sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) )";
-      stmt.executeUpdate(sql);
-      stmt = null;
+	   
+      	   
+      System.out.println("Check if table in base exist");
+      DatabaseMetaData md = connection.getMetaData();
+      ResultSet rs = md.getTables(null, null, "Persons", null);
+      while (rs.next()) {
+            System.out.println("Base Exist");
+	    baseExist = true;
+      }
+	   
+      if(!baseExist){
+      	System.out.println("Creating Table");
+      	stmt = conn.createStatement();
+      	sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) )";
+      	stmt.executeUpdate(sql);
+      	stmt = null;
+      }
+	   
       stmt = conn.createStatement();
       System.out.println("Inserting Data to Table");
       sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Sureshkumar', 'Deepak', 'Jackal Creek','Johannesburg');";
       stmt.executeUpdate(sql);	 
       stmt = null;
+	   
       stmt = conn.createStatement();
       sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
       ResultSet rs = stmt.executeQuery(sql);
