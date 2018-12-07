@@ -7,7 +7,7 @@ public class DockerConnectMySQL {
    static final String USER = "PLmysql";
    static final String PASS = "123qwe";
    
-   public static void main(String[] args) {
+   public static void main(String[] args) throws InterruptedException{
    Connection conn = null;
    Statement stmt = null;
    Boolean baseExist = false;
@@ -23,11 +23,13 @@ public class DockerConnectMySQL {
       	    conn = DriverManager.getConnection(DB_URL,USER,PASS);
             login = false; // Break out of loop because we got a connection - no exception was thrown
         }catch(SQLException se){
-            se.printStackTrace();
+		Thread.sleep(10000);
+            //se.printStackTrace();
         }catch(Exception e){
-            e.printStackTrace();
+		Thread.sleep(10000);
+            //e.printStackTrace();
         } finally {
-        	System.out.println("Connecting to database...");
+        	//System.out.println("Connecting to database...");
         }
     }
     
