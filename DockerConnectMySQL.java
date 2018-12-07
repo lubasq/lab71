@@ -14,7 +14,7 @@ public class DockerConnectMySQL {
    Boolean login = true;
    String sql;
    
-   Class.forName("com.mysql.cj.jdbc.Driver");
+   //Class.forName("com.mysql.cj.jdbc.Driver");
    
     while(login) {
         try{
