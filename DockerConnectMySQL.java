@@ -12,12 +12,20 @@ public class DockerConnectMySQL {
    Statement stmt = null;
    Boolean baseExist = false;
    String sql;
-  
+   Class.forName("com.mysql.cj.jdbc.Driver");
+   for (;;) {
+   	try{
+            System.out.println("Connecting to database...");
+      	    conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            return; // Break out of loop because we got a connection - no exception was thrown
+         }   
+         Thread.sleep(1);
+    }
+	System.out.println("Connected");   
    try{
-      Class.forName("com.mysql.cj.jdbc.Driver");
+      
 	   
-      System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(DB_URL,USER,PASS);	   
+      	   
       	   
       System.out.println("Check if table in base exist");
       DatabaseMetaData md = conn.getMetaData();
