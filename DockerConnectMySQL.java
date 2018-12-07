@@ -20,12 +20,13 @@ public class DockerConnectMySQL {
             return; // Break out of loop because we got a connection - no exception was thrown
          }   
          Thread.sleep(1);
-   }catch(SQLException se){
+   catch(SQLException se){
       se.printStackTrace();
    }catch(Exception e){
       e.printStackTrace();
    }finally{
 	System.out.println("Connected");  
+   }
    }
    try{
       
